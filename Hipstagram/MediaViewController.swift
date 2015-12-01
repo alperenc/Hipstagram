@@ -13,7 +13,9 @@ class MediaViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "media")
+        title = "Hipstagram"
+        
+        tableView.registerClass(MediaCell.self, forCellReuseIdentifier: "media")
         
     }
 
@@ -26,9 +28,12 @@ class MediaViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("media", forIndexPath: indexPath)
 
-        cell.backgroundColor = UIColor.lightGrayColor()
-
         return cell
+    }
+    
+    // MARK: - Table view delegate
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return tableView.bounds.width
     }
 
 }
