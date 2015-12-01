@@ -11,10 +11,14 @@ import PureLayout
 
 class MediaCell: UITableViewCell {
     
+    //MARK: - Properties
+    
     let mediaImageView = UIImageView()
     let avatarImageView = UIImageView()
     let usernameLabel = UILabel()
     let timeLabel = UILabel()
+    
+    // MARK: - Initializers
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -43,6 +47,8 @@ class MediaCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Laying out subviews
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -60,7 +66,6 @@ class MediaCell: UITableViewCell {
         timeLabel.autoPinEdgeToSuperviewMargin(.Right)
         timeLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: usernameLabel)
         
-        mediaImageView.autoSetDimensionsToSize(CGSizeMake(contentView.bounds.width, contentView.bounds.width))
         mediaImageView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Top)
         mediaImageView.autoPinEdge(.Top, toEdge: .Bottom, ofView: avatarImageView, withOffset: 8.0)
         

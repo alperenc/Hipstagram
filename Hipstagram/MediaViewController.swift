@@ -9,6 +9,8 @@
 import UIKit
 
 class MediaViewController: UITableViewController {
+    
+    // MARK: - Life cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +34,7 @@ class MediaViewController: UITableViewController {
     }
     
     // MARK: - Table view delegate
+    
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return tableView.bounds.width
     }
