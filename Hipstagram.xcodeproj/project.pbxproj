@@ -8,19 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		2EECD8211C0DAC12004062BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EECD8201C0DAC12004062BC /* AppDelegate.swift */; };
-		2EECD8231C0DAC12004062BC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EECD8221C0DAC12004062BC /* ViewController.swift */; };
-		2EECD8261C0DAC12004062BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EECD8241C0DAC12004062BC /* Main.storyboard */; };
 		2EECD8281C0DAC12004062BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EECD8271C0DAC12004062BC /* Assets.xcassets */; };
-		2EECD82B1C0DAC12004062BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EECD8291C0DAC12004062BC /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2EECD81D1C0DAC12004062BC /* Hipstagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hipstagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EECD8201C0DAC12004062BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2EECD8221C0DAC12004062BC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		2EECD8251C0DAC12004062BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2EECD8271C0DAC12004062BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		2EECD82A1C0DAC12004062BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2EECD82C1C0DAC12004062BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -55,10 +49,7 @@
 			isa = PBXGroup;
 			children = (
 				2EECD8201C0DAC12004062BC /* AppDelegate.swift */,
-				2EECD8221C0DAC12004062BC /* ViewController.swift */,
-				2EECD8241C0DAC12004062BC /* Main.storyboard */,
 				2EECD8271C0DAC12004062BC /* Assets.xcassets */,
-				2EECD8291C0DAC12004062BC /* LaunchScreen.storyboard */,
 				2EECD82C1C0DAC12004062BC /* Info.plist */,
 			);
 			path = Hipstagram;
@@ -122,9 +113,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2EECD82B1C0DAC12004062BC /* LaunchScreen.storyboard in Resources */,
 				2EECD8281C0DAC12004062BC /* Assets.xcassets in Resources */,
-				2EECD8261C0DAC12004062BC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,31 +124,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2EECD8231C0DAC12004062BC /* ViewController.swift in Sources */,
 				2EECD8211C0DAC12004062BC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		2EECD8241C0DAC12004062BC /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2EECD8251C0DAC12004062BC /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		2EECD8291C0DAC12004062BC /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2EECD82A1C0DAC12004062BC /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		2EECD82D1C0DAC12004062BC /* Debug */ = {
