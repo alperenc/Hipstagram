@@ -2,7 +2,7 @@
 //  MediaCell.swift
 //  Hipstagram
 //
-//  Created by Onur Candar on 01/12/15.
+//  Created by Alp Eren Can on 01/12/15.
 //  Copyright © 2015 Hipo. All rights reserved.
 //
 
@@ -13,19 +13,24 @@ class MediaCell: UITableViewCell {
     
     //MARK: - Properties
     
-    let mediaImageView = UIImageView()
-    let avatarImageView = UIImageView()
-    let usernameLabel = UILabel()
-    let timeLabel = UILabel()
+    var mediaImageView : UIImageView!
+    var avatarImageView : UIImageView!
+    var usernameLabel : UILabel!
+    var timeLabel : UILabel!
     
     // MARK: - Initializers
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        backgroundColor = UIColor.clearColor()
-        selectionStyle = UITableViewCellSelectionStyle.Gray
-        clipsToBounds = false
+        mediaImageView = UIImageView(frame: CGRectMake(0, 0, contentView.bounds.width, contentView.bounds.height))
+        avatarImageView = UIImageView(frame: CGRectMake(0, 0, 30, 30))
+        usernameLabel = UILabel(frame: CGRectZero)
+        timeLabel = UILabel(frame: CGRectZero)
+        
+//        backgroundColor = UIColor.clearColor()
+        selectionStyle = UITableViewCellSelectionStyle.None
+//        clipsToBounds = false
         
         mediaImageView.image = UIImage(named: "image")
         avatarImageView.image = UIImage(named: "image")
@@ -56,10 +61,6 @@ class MediaCell: UITableViewCell {
         avatarImageView.autoPinEdgeToSuperviewMargin(.Top)
         avatarImageView.autoSetDimensionsToSize(CGSizeMake(30, 30))
         
-        avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2.0
-        avatarImageView.layer.masksToBounds = true
-        avatarImageView.layoutIfNeeded()
-        
         usernameLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarImageView, withOffset: 8.0)
         usernameLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: avatarImageView)
         
@@ -68,6 +69,9 @@ class MediaCell: UITableViewCell {
         
         mediaImageView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Top)
         mediaImageView.autoPinEdge(.Top, toEdge: .Bottom, ofView: avatarImageView, withOffset: 8.0)
+        
+        avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2.0
+        avatarImageView.layer.masksToBounds = true
         
     }
 

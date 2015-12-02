@@ -2,11 +2,13 @@
 //  AppDelegate.swift
 //  Hipstagram
 //
-//  Created by Onur Candar on 01/12/15.
+//  Created by Alp Eren Can on 01/12/15.
 //  Copyright © 2015 Hipo. All rights reserved.
 //
 
 import UIKit
+
+import SimpleAuth
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,6 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        SimpleAuth.configuration()["instagram"] = [
+            "client_id": "7e8ea64d19504cf79696d44fba7d1208",
+            SimpleAuthRedirectURIKey: "hipstagram://auth/instagram"
+        ]
+        
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
         let mediaViewController = MediaViewController()

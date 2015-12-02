@@ -47,6 +47,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2E30DEE21C0E01EA00960871 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2EECD8321C0DADE0004062BC /* MediaViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		2E30DEE31C0E01F300960871 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2EECD8341C0DBB16004062BC /* MediaCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		2EECD8141C0DAC12004062BC = {
 			isa = PBXGroup;
 			children = (
@@ -70,8 +86,8 @@
 			isa = PBXGroup;
 			children = (
 				2EECD8201C0DAC12004062BC /* AppDelegate.swift */,
-				2EECD8321C0DADE0004062BC /* MediaViewController.swift */,
-				2EECD8341C0DBB16004062BC /* MediaCell.swift */,
+				2E30DEE21C0E01EA00960871 /* Controller */,
+				2E30DEE31C0E01F300960871 /* View */,
 				2EECD8271C0DAC12004062BC /* Assets.xcassets */,
 				2EECD82C1C0DAC12004062BC /* Info.plist */,
 			);

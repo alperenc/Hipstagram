@@ -2,11 +2,13 @@
 //  MediaViewController.swift
 //  Hipstagram
 //
-//  Created by Onur Candar on 01/12/15.
+//  Created by Alp Eren Can on 01/12/15.
 //  Copyright © 2015 Hipo. All rights reserved.
 //
 
 import UIKit
+
+import SimpleAuth
 
 class MediaViewController: UITableViewController {
     
@@ -18,6 +20,12 @@ class MediaViewController: UITableViewController {
         title = "Hipstagram"
         
         tableView.registerClass(MediaCell.self, forCellReuseIdentifier: "media")
+        
+        SimpleAuth.authorize("instagram") { (responseObject, error) in
+            if error == nil {
+                print(responseObject)
+            }
+        }
         
     }
 
