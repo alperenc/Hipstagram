@@ -21,10 +21,30 @@ class MediaViewController: UITableViewController {
         
         tableView.registerClass(MediaCell.self, forCellReuseIdentifier: "media")
         
-        SimpleAuth.authorize("instagram") { (responseObject, error) in
-            if error == nil {
-                print(responseObject)
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        InstagramClient.sharedInstance().accessToken = userDefaults.objectForKey("accessToken") as? String
+        
+        if InstagramClient.sharedInstance().accessToken == nil {
+            SimpleAuth.authorize("instagram", options: ["scope": ["public_content", "likes"]]) { (responseObject, error) in
+                guard let response = responseObject as? [String: AnyObject] else {
+                    print("Error receiving response!")
+                    return
+                }
+                
+                guard let credentials = response["credentials"] as? [String: AnyObject],
+                    let token = credentials["token"] as? String else {
+                        print("No such key: credentials")
+                        return
+                }
+                
+                print(response)
+                
+                userDefaults.setObject(token, forKey: "accessToken")
+                userDefaults.synchronize()
+                
             }
+        } else {
+            print("Logged in.")
         }
         
     }

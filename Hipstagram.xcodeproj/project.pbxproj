@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E30DEE71C0EFE9900960871 /* InstagramClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E30DEE61C0EFE9900960871 /* InstagramClient.swift */; };
+		2E30DEEB1C0F135F00960871 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E30DEEA1C0F135F00960871 /* Constants.swift */; };
+		2E30DEED1C0F16D000960871 /* Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E30DEEC1C0F16D000960871 /* Convenience.swift */; };
 		2EECD8211C0DAC12004062BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EECD8201C0DAC12004062BC /* AppDelegate.swift */; };
 		2EECD8281C0DAC12004062BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EECD8271C0DAC12004062BC /* Assets.xcassets */; };
 		2EECD8331C0DADE0004062BC /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EECD8321C0DADE0004062BC /* MediaViewController.swift */; };
@@ -16,6 +19,9 @@
 
 /* Begin PBXFileReference section */
 		22C0809CF5BA86D47ABE7BEA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		2E30DEE61C0EFE9900960871 /* InstagramClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramClient.swift; sourceTree = "<group>"; };
+		2E30DEEA1C0F135F00960871 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		2E30DEEC1C0F16D000960871 /* Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Convenience.swift; sourceTree = "<group>"; };
 		2EECD81D1C0DAC12004062BC /* Hipstagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hipstagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EECD8201C0DAC12004062BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EECD8271C0DAC12004062BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -63,6 +69,24 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		2E30DEE41C0EFE6100960871 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2E30DEE51C0EFE7100960871 /* API Client */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		2E30DEE51C0EFE7100960871 /* API Client */ = {
+			isa = PBXGroup;
+			children = (
+				2E30DEE61C0EFE9900960871 /* InstagramClient.swift */,
+				2E30DEEA1C0F135F00960871 /* Constants.swift */,
+				2E30DEEC1C0F16D000960871 /* Convenience.swift */,
+			);
+			name = "API Client";
+			sourceTree = "<group>";
+		};
 		2EECD8141C0DAC12004062BC = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				2EECD8201C0DAC12004062BC /* AppDelegate.swift */,
+				2E30DEE41C0EFE6100960871 /* Model */,
 				2E30DEE21C0E01EA00960871 /* Controller */,
 				2E30DEE31C0E01F300960871 /* View */,
 				2EECD8271C0DAC12004062BC /* Assets.xcassets */,
@@ -223,7 +248,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E30DEEB1C0F135F00960871 /* Constants.swift in Sources */,
+				2E30DEED1C0F16D000960871 /* Convenience.swift in Sources */,
 				2EECD8211C0DAC12004062BC /* AppDelegate.swift in Sources */,
+				2E30DEE71C0EFE9900960871 /* InstagramClient.swift in Sources */,
 				2EECD8351C0DBB16004062BC /* MediaCell.swift in Sources */,
 				2EECD8331C0DADE0004062BC /* MediaViewController.swift in Sources */,
 			);
