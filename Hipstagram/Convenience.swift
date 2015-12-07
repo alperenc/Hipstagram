@@ -9,6 +9,7 @@
 import Foundation
 
 import SimpleAuth
+import SAMCache
 
 extension InstagramClient {
     
@@ -66,6 +67,36 @@ extension InstagramClient {
                 completionHandler(accessToken: token, errorString: nil)
             }
         }
+    }
+    
+    func getImageFromURL(url: NSURL, completionHandler:(image: UIImage?) -> Void) {
+        let key = "\(url)"
+        let image = SAMCache.sharedCache().imageForKey(key)
+        
+        if image != nil {
+            completionHandler(image: image)
+            return
+        }
+        
+        let session = NSURLSession.sharedSession()
+        let request = NSURLRequest(URL: url)
+        
+        let downloadTask = session.downloadTaskWithRequest(request) { (location, response, error) -> Void in
+            
+            guard let url = location,
+                let imageData = NSData(contentsOfURL: url) else {
+                    return
+            }
+            
+            let image = UIImage(data: imageData)
+            SAMCache.sharedCache().setImage(image, forKey: key)
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                completionHandler(image: image)
+            })
+        }
+        
+        downloadTask.resume()
     }
     
 }

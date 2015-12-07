@@ -9,7 +9,6 @@
 import UIKit
 
 import PureLayout
-import SAMCache
 
 class MediaCell: UITableViewCell {
     
@@ -19,13 +18,17 @@ class MediaCell: UITableViewCell {
         didSet {
             if let urlStringMedia = media["images"]?["standard_resolution"]??["url"] as? String,
                 let url = NSURL(string: urlStringMedia) {
-                    downloadPhotoWithURL(url, imageView: mediaImageView)
+                    InstagramClient.sharedInstance().getImageFromURL(url) { (image) in
+                        self.mediaImageView.image = image
+                    }
             }
             
             if let user = media["user"] as? [String: AnyObject] {
                 if let urlStringAvatar = user["profile_picture"] as? String,
                     let url = NSURL(string: urlStringAvatar) {
-                        downloadPhotoWithURL(url, imageView: avatarImageView)
+                        InstagramClient.sharedInstance().getImageFromURL(url) { (image) in
+                            self.avatarImageView.image = image
+                        }
                 }
                 
                 if let username = user["username"] as? String {
@@ -98,39 +101,6 @@ class MediaCell: UITableViewCell {
         avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2.0
         avatarImageView.layer.masksToBounds = true
         
-    }
-    
-    // TODO: Move this to a dedicated controller
-    // MARK: - Image download helper
-    
-    func downloadPhotoWithURL(url: NSURL ,imageView: UIImageView) {
-        let key = "\(self.media["id"])-standard"
-        let photo = SAMCache.sharedCache().imageForKey(key)
-        
-        if photo != nil {
-            imageView.image = photo
-            return
-        }
-        
-        let session = NSURLSession.sharedSession()
-        let request = NSURLRequest(URL: url)
-        
-        let downloadTask = session.downloadTaskWithRequest(request) { (location, response, error) -> Void in
-            
-            guard let url = location,
-                let imageData = NSData(contentsOfURL: url) else {
-                    return
-            }
-            
-            let image = UIImage(data: imageData)
-            SAMCache.sharedCache().setImage(image, forKey: key)
-            
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                imageView.image = image
-            })
-        }
-        
-        downloadTask.resume()
     }
     
     // MARK: Configuring image views
