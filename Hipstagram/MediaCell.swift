@@ -7,11 +7,40 @@
 //
 
 import UIKit
+
 import PureLayout
+import SAMCache
 
 class MediaCell: UITableViewCell {
     
     //MARK: - Properties
+    
+    var media = [String: AnyObject]() {
+        didSet {
+            if let urlStringMedia = media["images"]?["standard_resolution"]??["url"] as? String,
+                let url = NSURL(string: urlStringMedia) {
+                    downloadPhotoWithURL(url, imageView: mediaImageView)
+            }
+            
+            if let user = media["user"] as? [String: AnyObject] {
+                if let urlStringAvatar = user["profile_picture"] as? String,
+                    let url = NSURL(string: urlStringAvatar) {
+                        downloadPhotoWithURL(url, imageView: avatarImageView)
+                }
+                
+                if let username = user["username"] as? String {
+                    usernameLabel.text = username
+                }
+            }
+            
+            if let createdAtString = media["created_time"] as? String,
+                let createdAtDouble = Double(createdAtString) {
+                    let createdAt = NSDate(timeIntervalSince1970: createdAtDouble).hipstagramDate()
+                    timeLabel.text = createdAt
+            }
+            
+        }
+    }
     
     var mediaImageView : UIImageView!
     var avatarImageView : UIImageView!
@@ -19,26 +48,22 @@ class MediaCell: UITableViewCell {
     var timeLabel : UILabel!
     
     // MARK: - Initializers
-
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        mediaImageView = UIImageView(frame: CGRectMake(0, 0, contentView.bounds.width, contentView.bounds.height))
-        avatarImageView = UIImageView(frame: CGRectMake(0, 0, 30, 30))
-        usernameLabel = UILabel(frame: CGRectZero)
-        timeLabel = UILabel(frame: CGRectZero)
-        
-//        backgroundColor = UIColor.clearColor()
         selectionStyle = UITableViewCellSelectionStyle.None
-//        clipsToBounds = false
         
-        mediaImageView.image = UIImage(named: "image")
-        avatarImageView.image = UIImage(named: "image")
+        mediaImageView = UIImageView(frame: CGRectMake(0, 0, contentView.bounds.width, contentView.bounds.height))
+        configureImageView(mediaImageView)
         
-        usernameLabel.text = "alperenc"
+        avatarImageView = UIImageView(frame: CGRectMake(0, 0, 30, 30))
+        configureImageView(avatarImageView)
+        
+        usernameLabel = UILabel(frame: CGRectZero)
         usernameLabel.textAlignment = NSTextAlignment.Left
         
-        timeLabel.text = "2d ago"
+        timeLabel = UILabel(frame: CGRectZero)
         timeLabel.textAlignment = NSTextAlignment.Right
         
         contentView.addSubview(avatarImageView)
@@ -47,7 +72,7 @@ class MediaCell: UITableViewCell {
         contentView.addSubview(mediaImageView)
         
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -74,5 +99,44 @@ class MediaCell: UITableViewCell {
         avatarImageView.layer.masksToBounds = true
         
     }
-
+    
+    // TODO: Move this to a dedicated controller
+    // MARK: - Image download helper
+    
+    func downloadPhotoWithURL(url: NSURL ,imageView: UIImageView) {
+        let key = "\(self.media["id"])-standard"
+        let photo = SAMCache.sharedCache().imageForKey(key)
+        
+        if photo != nil {
+            imageView.image = photo
+            return
+        }
+        
+        let session = NSURLSession.sharedSession()
+        let request = NSURLRequest(URL: url)
+        
+        let downloadTask = session.downloadTaskWithRequest(request) { (location, response, error) -> Void in
+            
+            guard let url = location,
+                let imageData = NSData(contentsOfURL: url) else {
+                    return
+            }
+            
+            let image = UIImage(data: imageData)
+            SAMCache.sharedCache().setImage(image, forKey: key)
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                imageView.image = image
+            })
+        }
+        
+        downloadTask.resume()
+    }
+    
+    // MARK: Configuring image views
+    func configureImageView(imageView: UIImageView) {
+        imageView.contentMode = .ScaleAspectFill
+        imageView.clipsToBounds = true
+    }
+    
 }

@@ -15,8 +15,7 @@ extension InstagramClient {
     struct Constants {
         
         // MARK: API Keys
-        static let ClientID = "7e8ea64d19504cf79696d44fba7d1208"
-        static let ClientSecret = "e465abd593c34213a855c01d811dbc57"
+        static let ClientID = "358150b5ca1a41c38b0a99a47e6557a4" //"7e8ea64d19504cf79696d44fba7d1208"
         
         // MARK: Base URL
         static let BaseSecureURL = "https://api.instagram.com/v1/"
@@ -28,13 +27,10 @@ extension InstagramClient {
     struct Methods {
         
         // MARK: Recent Media
-        static let RecentMedia = "users/self/media/recent"
+        static let RecentMedia = "media/popular"
         
         // MARK: Search Tags
         static let TagSearch = "tags/{tag-name}/media/recent"
-        
-        // MARK: Likes
-        static let Likes = "media/{media-id}/likes"
         
     }
     
@@ -45,18 +41,21 @@ extension InstagramClient {
         // MARK: Search Tags
         static let TagName = "tag-name"
         
-        // MARK: Likes
-        static let MediaID = "media-id"
-        
     }
     
     // MARK: Parameter Keys
     
     struct ParameterKeys {
         
-        // MARK: Search Tags
-        static let Q = "q"
-        static let accessToken = "access_token"
+        // MARK: Required parameter
+        static let ClientID = "client_id"
+        static let AccessToken = "access_token"
+        
+        // MARK: Count
+        static let Count = "count"
+        
+        // MARK: Minimum ID
+        static let MinID = "min_id"
         
     }
     

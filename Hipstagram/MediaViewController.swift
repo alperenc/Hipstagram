@@ -12,6 +12,9 @@ import SimpleAuth
 
 class MediaViewController: UITableViewController {
     
+    // MARK: - Properties
+    var media = [[String : AnyObject]]()
+    
     // MARK: - Life cycle
 
     override func viewDidLoad() {
@@ -21,30 +24,17 @@ class MediaViewController: UITableViewController {
         
         tableView.registerClass(MediaCell.self, forCellReuseIdentifier: "media")
         
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        InstagramClient.sharedInstance().accessToken = userDefaults.objectForKey("accessToken") as? String
-        
-        if InstagramClient.sharedInstance().accessToken == nil {
-            SimpleAuth.authorize("instagram", options: ["scope": ["public_content", "likes"]]) { (responseObject, error) in
-                guard let response = responseObject as? [String: AnyObject] else {
-                    print("Error receiving response!")
-                    return
+        InstagramClient.sharedInstance().getRecentMedia { (media, errorString) -> Void in
+            if let recentMedia = media {
+                self.media = recentMedia
+                print(self.media)
+                print(self.media.count)
+                
+                dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                    self.tableView.reloadData()
                 }
-                
-                guard let credentials = response["credentials"] as? [String: AnyObject],
-                    let token = credentials["token"] as? String else {
-                        print("No such key: credentials")
-                        return
-                }
-                
-                print(response)
-                
-                userDefaults.setObject(token, forKey: "accessToken")
-                userDefaults.synchronize()
-                
             }
-        } else {
-            print("Logged in.")
+            
         }
         
     }
@@ -52,14 +42,18 @@ class MediaViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return self.media.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("media", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("media", forIndexPath: indexPath) as! MediaCell
+        
+        cell.media = self.media[indexPath.row]
 
         return cell
     }
+    
+    
     
     // MARK: - Table view delegate
     

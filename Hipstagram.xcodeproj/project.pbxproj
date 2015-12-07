@@ -10,6 +10,7 @@
 		2E30DEE71C0EFE9900960871 /* InstagramClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E30DEE61C0EFE9900960871 /* InstagramClient.swift */; };
 		2E30DEEB1C0F135F00960871 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E30DEEA1C0F135F00960871 /* Constants.swift */; };
 		2E30DEED1C0F16D000960871 /* Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E30DEEC1C0F16D000960871 /* Convenience.swift */; };
+		2E7C3C431C15ED7300327A2D /* NSDate+HipstagramDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7C3C421C15ED7300327A2D /* NSDate+HipstagramDate.swift */; };
 		2EECD8211C0DAC12004062BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EECD8201C0DAC12004062BC /* AppDelegate.swift */; };
 		2EECD8281C0DAC12004062BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EECD8271C0DAC12004062BC /* Assets.xcassets */; };
 		2EECD8331C0DADE0004062BC /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EECD8321C0DADE0004062BC /* MediaViewController.swift */; };
@@ -22,6 +23,7 @@
 		2E30DEE61C0EFE9900960871 /* InstagramClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramClient.swift; sourceTree = "<group>"; };
 		2E30DEEA1C0F135F00960871 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2E30DEEC1C0F16D000960871 /* Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Convenience.swift; sourceTree = "<group>"; };
+		2E7C3C421C15ED7300327A2D /* NSDate+HipstagramDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+HipstagramDate.swift"; sourceTree = "<group>"; };
 		2EECD81D1C0DAC12004062BC /* Hipstagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hipstagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EECD8201C0DAC12004062BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EECD8271C0DAC12004062BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				2E30DEE31C0E01F300960871 /* View */,
 				2EECD8271C0DAC12004062BC /* Assets.xcassets */,
 				2EECD82C1C0DAC12004062BC /* Info.plist */,
+				2E7C3C421C15ED7300327A2D /* NSDate+HipstagramDate.swift */,
 			);
 			path = Hipstagram;
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 				2E30DEE71C0EFE9900960871 /* InstagramClient.swift in Sources */,
 				2EECD8351C0DBB16004062BC /* MediaCell.swift in Sources */,
 				2EECD8331C0DADE0004062BC /* MediaViewController.swift in Sources */,
+				2E7C3C431C15ED7300327A2D /* NSDate+HipstagramDate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +350,7 @@
 			baseConfigurationReference = F439F67E1F90FE0EC062A0D3 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				INFOPLIST_FILE = Hipstagram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hipolabs.Hipstagram;
@@ -358,6 +363,7 @@
 			baseConfigurationReference = 22C0809CF5BA86D47ABE7BEA /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				INFOPLIST_FILE = Hipstagram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hipolabs.Hipstagram;

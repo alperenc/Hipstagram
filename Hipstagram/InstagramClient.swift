@@ -15,14 +15,47 @@ class InstagramClient: NSObject {
     // Shared session
     var session: NSURLSession
     
+    // User defaults
+    let userDefaults : NSUserDefaults
+    
     // Authentication
-    var accessToken: String? = nil
+    var accessToken: String?
+    
+    // Minimum ID
+    var minID: Int!
     
     // MARK: Initializers
     
     override init() {
         session = NSURLSession.sharedSession()
+        userDefaults = NSUserDefaults.standardUserDefaults()
+        
+        // Get access token and minimum id from user defaults
+        
+        if let token = userDefaults.objectForKey("accessToken") as? String {
+            accessToken = token
+        } else {
+            accessToken = nil
+        }
+        
+        if let minimum = userDefaults.objectForKey("minID") as? Int {
+            minID = minimum
+        } else {
+            minID = 0
+        }
+        
         super.init()
+    }
+    
+    // MARK: Shared Instance
+    
+    class func sharedInstance() -> InstagramClient {
+        
+        struct Singleton {
+            static var sharedInstance = InstagramClient()
+        }
+        
+        return Singleton.sharedInstance
     }
     
     // MARK: GET
@@ -64,8 +97,6 @@ class InstagramClient: NSObject {
                 return
             }
             
-            print(String(data: data, encoding: NSUTF8StringEncoding))
-            
             InstagramClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
         }
         
@@ -75,67 +106,6 @@ class InstagramClient: NSObject {
         return task
         
     }
-    
-//    // MARK: POST
-//    
-//    func taskForPOSTMethod(method: String, parameters: [String: AnyObject], bodyData: [String: AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask? {
-//        
-//        // Build the URL and configure the request
-//        let urlString = Constants.BaseSecureURL + method + InstagramClient.escapedParameters(parameters)
-//        
-//        guard let url = NSURL(string: urlString) else {
-//            print("Unable to build the url.")
-//            return nil
-//        }
-//        
-////        guard let username = bodyData[BodyKeys.Username], let password = bodyData[BodyKeys.Password] else {
-////            print("Invalid username and password.")
-////            return nil
-////        }
-//        
-////        let bodyData = "client_id=\(Constants.ClientID)&client_secret=\(Constants.ClientSecret)&username=\(username)&password=\(password)"
-//        
-//        let request = NSMutableURLRequest(URL: url)
-//        request.HTTPMethod = "POST"
-////        request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding);
-//        
-//        let task = session.dataTaskWithRequest(request) { (data, response, error) in
-//            
-//            // Guard: Is there an error?
-//            guard (error == nil) else {
-//                print("Error with request")
-//                return
-//            }
-//            
-//            // Guard: Do we get a successful 2XX response? */
-//            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-//                if let response = response as? NSHTTPURLResponse {
-//                    print("Your request returned an invalid response! Status code: \(response.statusCode)!")
-//                } else if let response = response {
-//                    print("Your request returned an invalid response! Response: \(response)!")
-//                } else {
-//                    print("Your request returned an invalid response!")
-//                }
-//                return
-//            }
-//            
-//            // Guard: Is there any data returned?
-//            guard let data = data else {
-//                print("No data returned")
-//                return
-//            }
-//            
-//            InstagramClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
-//        }
-//        
-//        // Start the task
-//        task.resume()
-//        
-//        return task
-//        
-//    }
-
-    
     
     // MARK: Helpers
     
@@ -183,14 +153,4 @@ class InstagramClient: NSObject {
         return (!urlVars.isEmpty ? "?" : "") + urlVars.joinWithSeparator("&")
     }
     
-    // MARK: Shared Instance
-    
-    class func sharedInstance() -> InstagramClient {
-        
-        struct Singleton {
-            static var sharedInstance = InstagramClient()
-        }
-        
-        return Singleton.sharedInstance
-    }
 }
