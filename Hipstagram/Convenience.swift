@@ -37,6 +37,46 @@ extension InstagramClient {
         
     }
     
+    func getRecentMediaWithTag(tag: String, completionHandler: (media: [[String: AnyObject]]?, errorString: String?) -> Void) {
+        
+        getAccessToken { (accessToken, errorString) -> Void in
+            
+            guard let token = accessToken else {
+                completionHandler(media: nil, errorString: errorString)
+                return
+            }
+            
+            // Specify method parameters and API method
+            let parameters : [String: AnyObject] = [ParameterKeys.AccessToken: token, ParameterKeys.MinID: self.minID]
+            
+            if let apiMethod = InstagramClient.subtituteKeyInMethod(Methods.TagSearch, key: InstagramClient.URLKeys.TagName, value: tag) {
+                
+                // Make the request
+                self.taskForGETMethod(apiMethod, parameters: parameters) { (result, error) -> Void in
+                    guard let mediaResult = result["data"] as? [[String: AnyObject]] else {
+                        completionHandler(media: nil, errorString: error?.localizedDescription)
+                        return
+                    }
+                    
+                    if let last = mediaResult.last, let minimum = last["id"] as? Int {
+                        self.minID = minimum
+                        
+                        self.userDefaults.setObject(minimum, forKey: "minID")
+                        self.userDefaults.synchronize()
+                    }
+                    
+                    completionHandler(media: mediaResult, errorString: nil)
+                }
+                
+            } else {
+                completionHandler(media: nil, errorString: "Wrong API method")
+                
+            }
+            
+        }
+        
+    }
+    
     func getAccessToken(completionHandler: (accessToken: String?, errorString: String?) -> Void) {
         
         if accessToken != nil {
