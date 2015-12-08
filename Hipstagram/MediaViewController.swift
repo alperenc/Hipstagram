@@ -55,19 +55,39 @@ class MediaViewController: UITableViewController, UISearchBarDelegate {
     // MARK: - Table view data source
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.media.count
+        return media.count + 1
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        if indexPath.row < media.count {
+            return mediaCellForIndexPath(indexPath)
+        } else {
+            populateTableWithNewData()
+            return loadingCellForIndexPath(indexPath)
+        }
+    }
+    
+    func mediaCellForIndexPath(indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("media", forIndexPath: indexPath) as! MediaCell
         
         cell.media = self.media[indexPath.row]
-
+        
         return cell
     }
     
-    
-    
+    func loadingCellForIndexPath(indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("loading", forIndexPath: indexPath) 
+        
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+        activityIndicator.center = cell.center
+        
+        cell.addSubview(activityIndicator)
+        
+        activityIndicator.startAnimating()
+        
+        return cell
+    }
     // MARK: - Table view delegate
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
