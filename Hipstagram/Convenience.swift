@@ -19,7 +19,7 @@ extension InstagramClient {
         let parameters: [String: AnyObject] = [ParameterKeys.ClientID: Constants.ClientID, ParameterKeys.MinID: self.minID]
         
         // Make the request
-        self.taskForGETMethod(Methods.RecentMedia, parameters: parameters) { (result, error) -> Void in
+        taskForGETMethod(Methods.RecentMedia, parameters: parameters) { (result, error) -> Void in
             guard let mediaResult = result["data"] as? [[String: AnyObject]] else {
                 completionHandler(media: nil, errorString: error?.localizedDescription)
                 return
@@ -109,13 +109,13 @@ extension InstagramClient {
         }
     }
     
-    func getImageFromURL(url: NSURL, completionHandler:(image: UIImage?) -> Void) {
+    func getImageFromURL(url: NSURL, completionHandler:(image: UIImage?) -> Void) -> NSURLSessionTask? {
         let key = "\(url)"
         let image = SAMCache.sharedCache().imageForKey(key)
         
         if image != nil {
             completionHandler(image: image)
-            return
+            return nil
         }
         
         let session = NSURLSession.sharedSession()
@@ -137,6 +137,8 @@ extension InstagramClient {
         }
         
         downloadTask.resume()
+        
+        return downloadTask
     }
     
 }

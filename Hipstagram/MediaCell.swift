@@ -14,11 +14,20 @@ class MediaCell: UITableViewCell {
     
     //MARK: - Properties
     
+    var mediaDownloadTask: NSURLSessionTask?
+    var avatarDownloadTask: NSURLSessionTask?
+    
     var media = [String: AnyObject]() {
         didSet {
             if let urlStringMedia = media["images"]?["standard_resolution"]??["url"] as? String,
                 let url = NSURL(string: urlStringMedia) {
-                    InstagramClient.sharedInstance().getImageFromURL(url) { (image) in
+                    // If there's already a task started, cancel it.
+                    if let task = self.mediaDownloadTask {
+                        task.suspend()
+                        task.cancel()
+                    }
+                    
+                    self.mediaDownloadTask = InstagramClient.sharedInstance().getImageFromURL(url) { (image) in
                         self.mediaImageView.image = image
                     }
             }
@@ -26,7 +35,13 @@ class MediaCell: UITableViewCell {
             if let user = media["user"] as? [String: AnyObject] {
                 if let urlStringAvatar = user["profile_picture"] as? String,
                     let url = NSURL(string: urlStringAvatar) {
-                        InstagramClient.sharedInstance().getImageFromURL(url) { (image) in
+                        // If there's already a task started, cancel it.
+                        if let task = self.avatarDownloadTask {
+                            task.suspend()
+                            task.cancel()
+                        }
+                        
+                        self.avatarDownloadTask = InstagramClient.sharedInstance().getImageFromURL(url) { (image) in
                             self.avatarImageView.image = image
                         }
                 }
@@ -78,6 +93,11 @@ class MediaCell: UITableViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        mediaImageView.image = nil
+        avatarImageView.image = nil
     }
     
     // MARK: - Laying out subviews
