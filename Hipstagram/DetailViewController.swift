@@ -38,6 +38,14 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         imageView.autoPinEdgesToSuperviewEdges()
         imageView.autoAlignAxisToSuperviewAxis(ALAxis.Horizontal)
         imageView.autoAlignAxisToSuperviewAxis(ALAxis.Vertical)
+        
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: "close")
+        view.addGestureRecognizer(tapRecognizer)
+        
+    }
+    
+    func close() {
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     // MARK: - Scroll view delegate
