@@ -2,7 +2,7 @@
 //  Convenience.swift
 //  Hipstagram
 //
-//  Created by Onur Candar on 02/12/15.
+//  Created by Alp Eren Can on 02/12/15.
 //  Copyright © 2015 Hipo. All rights reserved.
 //
 

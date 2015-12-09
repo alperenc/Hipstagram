@@ -88,10 +88,23 @@ class MediaViewController: UITableViewController, UISearchBarDelegate {
         
         return cell
     }
+    
     // MARK: - Table view delegate
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return tableView.bounds.width
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! MediaCell
+        
+        let detailController = DetailViewController()
+        if let image = cell.mediaImageView.image {
+            detailController.imageData = UIImageJPEGRepresentation(image, 1.0)
+        }
+        
+        presentViewController(detailController, animated: true, completion: nil)
     }
     
     // MARK: - Search bar delegate

@@ -2,7 +2,7 @@
 //  NSDate+HipstagramDate.swift
 //  Hipstagram
 //
-//  Created by Onur Candar on 07/12/15.
+//  Created by Alp Eren Can on 07/12/15.
 //  Copyright © 2015 Hipo. All rights reserved.
 //
 
